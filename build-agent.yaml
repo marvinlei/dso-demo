@@ -47,9 +47,9 @@ spec:
         sources:
         - secret:
           name: regcred
-             items:
-               - key: .dockerconfigjson
-                 path: config.json
+          items:
+            - key: .dockerconfigjson
+              path: config.json
   volumes:
     - name: m2
       hostPath:
