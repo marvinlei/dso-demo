@@ -38,20 +38,20 @@ pipeline {
             }
           }
         }
-        stage('Deploy to Dev') {
+        stage('Docker BnP') {
           steps {
-          // TODO
-          sh "echo done"
-          }
+            container('kaniko') {
+            sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/korsowito/dsodemo'
+          } 
+         }
         }
       }
     }
-    stage('Docker BnP') {
+    stage('Deploy to Dev') {
       steps {
-        container('kaniko') {
-          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=docker.io/korsowito/dsodemo'
-        } 
+        // TODO
+        sh "echo done"
       }
-    }   
+    }
   }
 }
