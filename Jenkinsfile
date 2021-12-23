@@ -19,7 +19,7 @@ pipeline {
       }
     }
     stage('SCA') {
-    	steps {
+	steps {
 		container('maven') {
 			  catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
 			  sh 'mvn org.owasp:dependency-check-maven:check'
@@ -34,6 +34,7 @@ pipeline {
 		    // dependencyCheckPublisher pattern: 'report.xml'
 	    }
     } 
+  }
   }
       parallel {
         stage('Unit Tests') {
