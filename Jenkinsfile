@@ -18,7 +18,7 @@ pipeline {
         }
       }
     }
-    stage('Test') {
+    stage('Static Analysis') {
       parallel {
         stage('Unit Tests') {
           steps {
@@ -26,10 +26,12 @@ pipeline {
               sh 'mvn test'
             }
           }
+        }
+        stage('SCA') {
           steps {
             container('maven') {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-              sh 'mvn org.owasp:dependency-check-maven:check'
+                sh 'mvn org.owasp:dependency-check-maven:check'
               }
             } 
           }
