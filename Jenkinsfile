@@ -12,7 +12,7 @@ pipeline {
         stage('Compile') {
           steps {
             container('maven') {
-              sh 'mvn compile'
+              sh 'mvn compile -Dorg.csanchez.jenkins.plugins.kubernetes.pipeline.ContainerExecDecorator.websocketConnectionTimeout=60'
             }
           }
         }
